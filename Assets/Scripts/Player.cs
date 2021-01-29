@@ -1,11 +1,16 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
-public class Player : MonoBehaviour
+public class Player : Interacter
 {
     public PlayerInputPck Input = new PlayerInputPck();
-
-    private void Update() {
+    
+    protected override void Update() {
+        base.Update();
         Input.Update();
+
+        if(Input.Interact)
+            Interact();
     }
 }
