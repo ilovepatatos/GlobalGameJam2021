@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Player player;
     private Rigidbody2D rb;
 
-    public Action OnPlayerStartMoving, OnPlayerStopMoving;
+    public event Action OnPlayerStartMoving, OnPlayerStopMoving;
 
     private static Dictionary<Vector2, float> zAxisRotationPresets = new Dictionary<Vector2, float>()
     {
@@ -32,8 +32,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate() {
         Vector2 dir = player.Input.MovementDirection;
-        UpdateMovement(dir, Time.fixedDeltaTime);
         UpdateRotation(dir);
+        UpdateMovement(dir, Time.fixedDeltaTime);
         UpdateAnimator(dir);
     }
 

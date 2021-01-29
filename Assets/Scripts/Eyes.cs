@@ -5,9 +5,8 @@ using Random = UnityEngine.Random;
 public class Eyes : MonoBehaviour
 {
     [Header("Eyes")] 
-    public float DelayMin = 1;
-    public float DelayMax = 5;
-    
+    [MinMax(1, 10)]
+    public Vector2 Delay = new Vector2(0, 10);
     private Animator animator;
 
     private void Awake() {
@@ -19,7 +18,7 @@ public class Eyes : MonoBehaviour
     }
 
     private void PrepareNextBlink() {
-        ActionDelayedManager.AddAction(new ActionDelayed(Random.Range(DelayMin, DelayMax), Blink));
+        ActionDelayedManager.AddAction(new ActionDelayed(Random.Range(Delay.x, Delay.y), Blink));
     }
 
     private void Blink() {
