@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     private void Awake() {
         player = GetComponent<Player>();
         rb = GetComponent<Rigidbody2D>();
+
+        player.OnInteractionBegin += obj => { rb.centerOfMass = transform.position + transform.up * 5; };
     }
 
     private void FixedUpdate() {

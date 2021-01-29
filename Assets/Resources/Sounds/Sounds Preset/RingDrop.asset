@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 627b4b8891fc9da4a95cdc971dc53ba7, type: 3}
-  m_Name: InteractionError
+  m_Name: RingDrop
   m_EditorClassIdentifier: 
-  Clip: {fileID: 8300000, guid: ebdfa41e0abc58143b73452e0cc714e3, type: 3}
-  Volume: 0.3
+  Clip: {fileID: 8300000, guid: e1f557ae67ff11c4fb4c7b2efeddee85, type: 3}
+  Volume: 0.2

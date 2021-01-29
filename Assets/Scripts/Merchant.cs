@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class Merchant : Interactable
 {
-    public override bool IsInteractable() {
-        return true;
+    public override void OnInteractionStart(Interacter interacter) {
+        
     }
 
-    public override void Interact() {
-        Debug.Log("Bonjour mr, que puis-je pour vous?");
+    public override void OnInteractionStop() {
+        
     }
 }
