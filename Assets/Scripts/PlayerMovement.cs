@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    public float Speed;
+    public float Speed = 5;
     [HideInInspector] public bool IsPlayerMoving;
 
     private Player player;
@@ -15,7 +15,6 @@ public class PlayerMovement : MonoBehaviour
 
     private static Dictionary<Vector2, float> zAxisRotationPresets = new Dictionary<Vector2, float>()
     {
-        {Vector2.zero, 0},
         {Vector2.up, 0},
         {new Vector2(-1, 1), 45},
         {Vector2.left, 90},
@@ -35,6 +34,11 @@ public class PlayerMovement : MonoBehaviour
         Vector2 dir = player.Input.MovementDirection;
         UpdateMovement(dir, Time.fixedDeltaTime);
         UpdateRotation(dir);
+        UpdateAnimator(dir);
+    }
+
+    private void UpdateAnimator(Vector2 dir) {
+        player.Animator.SetFloat("MovementSpeed", Math.Max(Math.Abs(dir.x), Math.Abs(dir.y)));
     }
 
     private void UpdateMovement(Vector2 dir, float delta) {
@@ -63,15 +67,12 @@ public class PlayerMovement : MonoBehaviour
         return Math.Abs(dir.x) <= 0 && Math.Abs(dir.y) <= 0;
     }
 
-    private float ResolveRotation(Vector2 dir) {
-        if (!zAxisRotationPresets.ContainsKey(dir)) {
-            Debug.Log($"Couldn't find {dir}");
-            return 0;
-        }
-        return zAxisRotationPresets[dir];
+    private void UpdateRotation(Vector2 dir) {
+        if (zAxisRotationPresets.ContainsKey(dir))
+            rb.SetRotation(ResolveRotation(dir));
     }
 
-    private void UpdateRotation(Vector2 dir) {
-        rb.SetRotation(ResolveRotation(dir));
+    private float ResolveRotation(Vector2 dir) {
+        return zAxisRotationPresets[dir];
     }
 }

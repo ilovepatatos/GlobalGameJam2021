@@ -9,8 +9,7 @@ public class Interacter : MonoBehaviour
     [Header("Interacter")] [Range(0f, 100f)]
     public float InteractDistance = 2;
 
-    [HideInInspector]
-    public int InteractLayer = LayerMask.GetMask("Interactable"); //TODO Make selection like PhysicLayer
+    [HideInInspector] public int InteractLayer; //TODO Make selection like PhysicLayer
 
     [Space] public SoundDefinition InteractErrorSound;
 
@@ -34,6 +33,10 @@ public class Interacter : MonoBehaviour
         }
     }
 
+    protected virtual void Awake() {
+        InteractLayer = LayerMask.GetMask("Interactable");
+    }
+
     protected virtual void Update() {
         UpdateInteractableItemsInRange();
         ResolveInteractable();
@@ -45,7 +48,8 @@ public class Interacter : MonoBehaviour
 
         Transform t = transform;
         RaycastHit2D hit = Physics2D.Raycast(t.position, t.forward, InteractDistance, InteractLayer);
-        HasItemInRange = hit.transform.TryGetComponent(out currentFrameInteractableInRange);
+        if (hit.transform != null)
+            HasItemInRange = hit.transform.TryGetComponent(out currentFrameInteractableInRange);
     }
 
     private void ResolveInteractable() {
@@ -53,7 +57,7 @@ public class Interacter : MonoBehaviour
             OnInteractableItemOutOfSight?.Invoke(lastFrameInteractableInRange);
         else if (!HadItemInRange && HasItemInRange)
             OnInterableItemInSight?.Invoke(currentFrameInteractableInRange);
-        else if (lastFrameInteractableInRange.GetInstanceID() != currentFrameInteractableInRange.GetInstanceID()) {
+        else if (lastFrameInteractableInRange && lastFrameInteractableInRange.GetInstanceID() != currentFrameInteractableInRange.GetInstanceID()) {
             OnInteractableItemOutOfSight?.Invoke(lastFrameInteractableInRange);
             OnInterableItemInSight?.Invoke(currentFrameInteractableInRange);
         }
