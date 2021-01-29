@@ -13,6 +13,8 @@
 /[Aa]ssets/Universal Sound FX
 /[Aa]ssets/Universal Sound FX.meta
 /[Aa]ssets/Sycoforge
+/[Aa]ssets/Interface and Item Sounds
+/[Aa]ssets/Interface and Item Sounds.meta
 /[Aa]ssets/Sycoforge.meta
 /[Aa]ssets/Editor Default Resources
 /[Aa]ssets/Editor Default Resources.meta
@@ -70,3 +72,5 @@ crashlytics-build.properties
 
 # Rider
 .[Ii]dea/
+UserSettings/EditorUserSettings.asset
+Packages/packages-lock.json
