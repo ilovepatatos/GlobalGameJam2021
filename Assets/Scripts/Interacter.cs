@@ -23,7 +23,7 @@ public class Interacter : MonoBehaviour
 
 
     public void Interact() {
-        if (HasItemInRange && currentFrameInteractableInRange != null) {
+        if (HasItemInRange && currentFrameInteractableInRange) {
             if (currentFrameInteractableInRange.IsInteractable())
                 currentFrameInteractableInRange.Interact();
         }
@@ -35,6 +35,9 @@ public class Interacter : MonoBehaviour
 
     protected virtual void Awake() {
         InteractLayer = LayerMask.GetMask("Interactable");
+
+        OnInterableItemInSight += obj => { Debug.Log($"Can interact with {obj.name}"); };
+        OnInteractableItemOutOfSight += obj => { Debug.Log($"Cannot interact with {obj.name} anymore..."); };
     }
 
     protected virtual void Update() {
@@ -45,11 +48,14 @@ public class Interacter : MonoBehaviour
     private void UpdateInteractableItemsInRange() {
         HadItemInRange = HasItemInRange;
         lastFrameInteractableInRange = currentFrameInteractableInRange;
+        HasItemInRange = false;
 
         Transform t = transform;
-        RaycastHit2D hit = Physics2D.Raycast(t.position, t.forward, InteractDistance, InteractLayer);
-        if (hit.transform != null)
+        Debug.DrawRay(t.position, t.up, Color.red, InteractDistance);
+        RaycastHit2D hit = Physics2D.Raycast(t.position, t.up, InteractDistance, InteractLayer);
+        if (hit.transform != null) {
             HasItemInRange = hit.transform.TryGetComponent(out currentFrameInteractableInRange);
+        }
     }
 
     private void ResolveInteractable() {
