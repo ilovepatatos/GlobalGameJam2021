@@ -210,9 +210,11 @@ GameObject:
   - component: {fileID: 3704792669754164095}
   - component: {fileID: 3704792669754164092}
   - component: {fileID: 3704792669754164093}
+  - component: {fileID: 4524577326632112934}
   - component: {fileID: 3704792669754164090}
   - component: {fileID: 3704792669754164091}
   - component: {fileID: 3704792669754164088}
+  - component: {fileID: 139389446}
   m_Layer: 0
   m_Name: Bernard
   m_TagString: Untagged
@@ -306,6 +308,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &4524577326632112934
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3704792669754164089}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.021086842, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.27226236
 --- !u!50 &3704792669754164090
 Rigidbody2D:
   serializedVersion: 4
@@ -323,10 +341,10 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &3704792669754164091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,6 +373,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InteractDistance: 2
   InteractLayer: 0
-  InteractErrorSound: {fileID: 0}
-  HasItemInRange: 0
+  InteractErrorSound: {fileID: 11400000, guid: 5ea74be0f0db3ed46846b4edf29f989a, type: 2}
+  CurrentInteractableSelected: {fileID: 0}
   Animator: {fileID: 3704792669754164093}
+  Joint: {fileID: 139389446}
+--- !u!255 &139389446
+FixedJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3704792669754164089}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 1
+  m_ConnectedRigidBody: {fileID: 3704792669754164090}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: -0}
+  m_DampingRatio: 0
+  m_Frequency: 0

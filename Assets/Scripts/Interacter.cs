@@ -12,33 +12,55 @@ public class Interacter : MonoBehaviour
 
     [HideInInspector] public int InteractLayer; //TODO Make selection like PhysicLayer
 
-    [Space] public SoundDefinition InteractErrorSound;
+    [Space] public SoundSettings InteractErrorSound;
 
-    [HideInInspector] public bool HasItemInRange;
-    private bool HadItemInRange;
+    //
+    public bool IsInteracting => CurrentInteractableSelected != null;
+    [HideInInspector] public Interactable CurrentInteractableSelected;
 
+    public bool HasItemInRange => currentFrameInteractableInRange != null;
+    private bool HadItemInRange => lastFrameInteractableInRange != null;
     private Interactable lastFrameInteractableInRange, currentFrameInteractableInRange;
 
-    public Action<Interactable> OnInterableItemInSight, OnInteractableItemOutOfSight;
-    public Action OnInteractionFail;
+    public event Action<Interactable> OnInteractableEnterRange, OnInteractableLeaveRange;
+    public event Action<Interactable> OnInteractionBegin, OnInteractionEnd;
+    public event Action OnInteractionFail;
 
+    public virtual bool CanInteract() {
+        return HasItemInRange;
+    }
 
-    public void Interact() {
-        if (HasItemInRange && currentFrameInteractableInRange) {
-            if (currentFrameInteractableInRange.IsInteractable())
-                currentFrameInteractableInRange.Interact();
-        }
-        else {
-            //TODO Play fail sound
+    public bool TryInteract() {
+        if (!CanInteract() || !currentFrameInteractableInRange.CanStartInteraction(this)) {
             OnInteractionFail?.Invoke();
+            return false;
         }
+
+        CurrentInteractableSelected = currentFrameInteractableInRange;
+        CurrentInteractableSelected.OnInteractionStart(this);
+        OnInteractionBegin?.Invoke(CurrentInteractableSelected);
+        return true;
+    }
+
+    public bool TryTerminateInteraction() {
+        if (!IsInteracting || !IsInteractableAccessible(CurrentInteractableSelected) ||
+            !CurrentInteractableSelected.CanStopInteraction(this)) {
+            OnInteractionFail?.Invoke();
+            return false;
+        }
+
+        CurrentInteractableSelected.OnInteractionStop();
+        OnInteractionEnd?.Invoke(CurrentInteractableSelected);
+        CurrentInteractableSelected = null;
+        return true;
     }
 
     protected virtual void Awake() {
         InteractLayer = LayerMask.GetMask("Interactable");
 
-        OnInterableItemInSight += obj => { Debug.Log($"Can interact with {obj.name}"); };
-        OnInteractableItemOutOfSight += obj => { Debug.Log($"Cannot interact with {obj.name} anymore..."); };
+        OnInteractionFail += () => { SoundManager.PlayOneShot(InteractErrorSound); };
+        OnInteractableEnterRange += obj => { Debug.Log($"{obj.name} entered interactable range"); };
+        OnInteractableLeaveRange += obj => { Debug.Log($"{obj.name} left interactable range..."); };
     }
 
     protected virtual void Update() {
@@ -47,26 +69,42 @@ public class Interacter : MonoBehaviour
     }
 
     private void UpdateInteractableItemsInRange() {
-        HadItemInRange = HasItemInRange;
         lastFrameInteractableInRange = currentFrameInteractableInRange;
-        HasItemInRange = false;
+        currentFrameInteractableInRange = null;
 
         Transform t = transform;
-        Debug.DrawRay(t.position, t.up, Color.red, InteractDistance);
         RaycastHit2D hit = Physics2D.Raycast(t.position, t.up, InteractDistance, InteractLayer);
         if (hit.transform != null) {
-            HasItemInRange = hit.transform.TryGetComponent(out currentFrameInteractableInRange);
+            hit.transform.TryGetComponent(out currentFrameInteractableInRange);
         }
     }
 
     private void ResolveInteractable() {
         if (HadItemInRange && !HasItemInRange)
-            OnInteractableItemOutOfSight?.Invoke(lastFrameInteractableInRange);
+            OnInteractableLeaveRange?.Invoke(lastFrameInteractableInRange);
         else if (!HadItemInRange && HasItemInRange)
-            OnInterableItemInSight?.Invoke(currentFrameInteractableInRange);
-        else if (lastFrameInteractableInRange && lastFrameInteractableInRange.GetInstanceID() != currentFrameInteractableInRange.GetInstanceID()) {
-            OnInteractableItemOutOfSight?.Invoke(lastFrameInteractableInRange);
-            OnInterableItemInSight?.Invoke(currentFrameInteractableInRange);
+            OnInteractableEnterRange?.Invoke(currentFrameInteractableInRange);
+        else if (lastFrameInteractableInRange && lastFrameInteractableInRange.GetInstanceID() !=
+            currentFrameInteractableInRange.GetInstanceID()) {
+            OnInteractableLeaveRange?.Invoke(lastFrameInteractableInRange);
+            OnInteractableEnterRange?.Invoke(currentFrameInteractableInRange);
         }
+    }
+
+    private bool IsInteractableAccessible(Interactable interactable) {
+        int objectiveId = interactable.transform.GetInstanceID();
+
+        Transform t = transform;
+        RaycastHit2D[] hits = Physics2D.RaycastAll(t.position, t.up, InteractDistance, InteractLayer);
+        foreach (RaycastHit2D hit in hits) 
+            if (hit.transform.GetInstanceID() == objectiveId)
+                return true;
+
+        return false;
+    }
+
+    private void OnDrawGizmosSelected() {
+        Transform t = transform;
+        Debug.DrawRay(t.position, t.up * InteractDistance, Color.red);
     }
 }
