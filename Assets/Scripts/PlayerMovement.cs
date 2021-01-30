@@ -7,9 +7,11 @@ public class PlayerMovement : MonoBehaviour
 {
     public float Speed = 5;
     [HideInInspector] public bool IsPlayerMoving;
+    [HideInInspector] public bool EnableMultiDirectionMovement = true;
 
     private Player player;
-    private Rigidbody2D rb;
+    public Rigidbody2D Rb;
+    private float onInteractionInitialRotation;
 
     public event Action OnPlayerStartMoving, OnPlayerStopMoving;
 
@@ -25,15 +27,34 @@ public class PlayerMovement : MonoBehaviour
         {new Vector2(1, 1), 315},
     };
 
+    private static Dictionary<Vector2, float> zAxisRotationPresetsInvert = new Dictionary<Vector2, float>()
+    {
+        {Vector2.up, 180},
+        {new Vector2(-1, 1), 225},
+        {Vector2.left, 270},
+        {new Vector2(-1, -1), 315},
+        {Vector2.down, 0},
+        {new Vector2(1, -1), 45},
+        {Vector2.right, 90},
+        {new Vector2(1, 1), 135},
+    };
+
+    public void OnPickupObject() {
+        onInteractionInitialRotation = To180Angle(Rb.rotation);
+    }
+
     private void Awake() {
         player = GetComponent<Player>();
-        rb = GetComponent<Rigidbody2D>();
-
-        player.OnInteractionBegin += obj => { rb.centerOfMass = transform.position + transform.up * 5; };
+        Rb = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate() {
         Vector2 dir = player.Input.MovementDirection;
+
+        if (player.IsCarryingObject)
+            if (!CanMoveTowardDirection(dir))
+                dir = Vector2.zero;
+
         UpdateRotation(dir);
         UpdateMovement(dir, Time.fixedDeltaTime);
         UpdateAnimator(dir);
@@ -45,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateMovement(Vector2 dir, float delta) {
         ResolveMovement(dir);
-        rb.MovePosition((Vector2) transform.position + dir.normalized * (delta * Speed));
+        Rb.MovePosition((Vector2) transform.position + dir.normalized * (delta * Speed));
     }
 
     private void ResolveMovement(Vector2 dir) {
@@ -70,11 +91,41 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void UpdateRotation(Vector2 dir) {
-        if (zAxisRotationPresets.ContainsKey(dir))
-            rb.SetRotation(ResolveRotation(dir));
+        if (!zAxisRotationPresets.ContainsKey(dir)) {
+            if (player.IsCarryingObject)
+                FallbackToInitialRotation();
+        }
+        else
+            Rb.SetRotation(ResolveRotation(dir));
     }
 
     private float ResolveRotation(Vector2 dir) {
+        if (player.IsCarryingObject)
+            return zAxisRotationPresetsInvert[dir];
         return zAxisRotationPresets[dir];
+    }
+
+    private void FallbackToInitialRotation() {
+        Rb.SetRotation(onInteractionInitialRotation);
+    }
+
+    private bool CanMoveTowardDirection(Vector2 dir) {
+        if (!zAxisRotationPresetsInvert.ContainsKey(dir))
+            return false;
+        return IsRotationWithinRange(zAxisRotationPresetsInvert[dir], -45, 45);
+    }
+
+    private bool IsRotationWithinRange(float rotation, float min, float max) {
+        float angle = To180Angle(rotation) - onInteractionInitialRotation;
+        if (angle <= -315 && angle > -360) return true;    //Its a game jam ok! I was close, don't judge... -_-
+        return angle >= min && angle <= max;
+    }
+
+    // Returns an angle between [-180, 180]
+    private float To180Angle(float angle) {
+        angle %= 360;
+        if (angle > 180) return angle - 360;
+        if (angle < -180) return angle + 360;
+        return angle;
     }
 }
