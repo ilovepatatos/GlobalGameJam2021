@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SettingSliders
   m_EditorClassIdentifier: 
   Clip: {fileID: 8300000, guid: e2714ae7640ef4b43b3a34d0d4ddd93b, type: 3}
-  Volume: 0.5
+  Volume: 0.15
