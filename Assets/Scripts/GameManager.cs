@@ -7,4 +7,8 @@ public class GameManager : MonoBehaviour
         Debug.unityLogger.logEnabled = false;
 #endif
     }
+
+    public void StartGame() {
+        TimelineRefs.Instance.Transition_Menu_Game.Play();
+    }
 }
