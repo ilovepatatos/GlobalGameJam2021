@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool EnableMultiDirectionMovement = true;
 
     private Player player;
-    public Rigidbody2D Rb;
+    [HideInInspector] public Rigidbody2D Rb;
     private float onInteractionInitialRotation;
 
     public event Action OnPlayerStartMoving, OnPlayerStopMoving;
@@ -61,7 +61,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void UpdateAnimator(Vector2 dir) {
-        player.Animator.SetFloat("MovementSpeed", Math.Max(Math.Abs(dir.x), Math.Abs(dir.y)));
+        float speed = Math.Max(Math.Abs(dir.x), Math.Abs(dir.y));
+        player.PlayerAnimator.SetFloat("Speed", speed);
+        player.RightClawAnimator.SetFloat("Speed", speed);
+        player.LeftClawAnimator.SetFloat("Speed", speed);
     }
 
     private void UpdateMovement(Vector2 dir, float delta) {

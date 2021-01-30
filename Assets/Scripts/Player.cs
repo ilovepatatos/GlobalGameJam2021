@@ -6,8 +6,12 @@ public class Player : Interacter
 {
     [Header("Player")] 
     public Transform Body;
-    public Animator Animator;
     public FixedJoint2D Joint;
+    
+    [Space]
+    public Animator PlayerAnimator;
+    public Animator LeftClawAnimator, RightClawAnimator;
+        
     private PlayerMovement playerMovement;
 
     public PlayerInputPck Input = new PlayerInputPck();
@@ -31,6 +35,7 @@ public class Player : Interacter
         base.OnInteraction(interactable);
 
         if (CurrentInteractableSelected is LostObject obj) {
+            RightClawAnimator.SetBool("IsCarryingObject", true);
             SetPivot(obj.CarryDistance);
             playerMovement.OnPickupObject();
         }
@@ -39,9 +44,11 @@ public class Player : Interacter
     protected override void OnTerminateInteraction(Interactable interactable) {
         base.OnTerminateInteraction(interactable);
         Joint.connectedBody = playerMovement.Rb;
-        
-        if (CurrentInteractableSelected is LostObject obj)
+
+        if (CurrentInteractableSelected is LostObject obj) {
+            RightClawAnimator.SetBool("IsCarryingObject", false);
             SetPivot(-obj.CarryDistance);
+        }
     }
 
     private void ResolveInteraction() {

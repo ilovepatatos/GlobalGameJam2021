@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public class Interacter : MonoBehaviour
 {
-    [Header("Interacter")] [Range(0f, 100f)]
+    [Header("Interacter")] [Range(0f, 5f)]
     public float InteractDistance = 2;
 
     [HideInInspector] public int InteractLayer; //TODO Make selection like PhysicLayer
