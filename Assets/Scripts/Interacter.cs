@@ -6,8 +6,7 @@ using UnityEngine;
 /// </summary>
 public class Interacter : MonoBehaviour
 {
-    [Header("Interacter")] 
-    [Range(0f, 100f)]
+    [Header("Interacter")] [Range(0f, 100f)]
     public float InteractDistance = 2;
 
     [HideInInspector] public int InteractLayer; //TODO Make selection like PhysicLayer
@@ -38,6 +37,7 @@ public class Interacter : MonoBehaviour
 
         CurrentInteractableSelected = currentFrameInteractableInRange;
         CurrentInteractableSelected.OnInteractionStart(this);
+        OnInteraction(CurrentInteractableSelected);
         OnInteractionBegin?.Invoke(CurrentInteractableSelected);
         return true;
     }
@@ -50,10 +50,14 @@ public class Interacter : MonoBehaviour
         }
 
         CurrentInteractableSelected.OnInteractionStop();
+        OnTerminateInteraction(CurrentInteractableSelected);
         OnInteractionEnd?.Invoke(CurrentInteractableSelected);
         CurrentInteractableSelected = null;
         return true;
     }
+    
+    protected virtual void OnInteraction(Interactable interactable) { }
+    protected virtual void OnTerminateInteraction(Interactable interactable) { }
 
     protected virtual void Awake() {
         InteractLayer = LayerMask.GetMask("Interactable");
@@ -96,7 +100,7 @@ public class Interacter : MonoBehaviour
 
         Transform t = transform;
         RaycastHit2D[] hits = Physics2D.RaycastAll(t.position, t.up, InteractDistance, InteractLayer);
-        foreach (RaycastHit2D hit in hits) 
+        foreach (RaycastHit2D hit in hits)
             if (hit.transform.GetInstanceID() == objectiveId)
                 return true;
 
