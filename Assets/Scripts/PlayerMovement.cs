@@ -77,11 +77,13 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateAnimator(Vector2 dir, float weight) {
         float speed = Math.Max(Math.Abs(dir.x), Math.Abs(dir.y));
         player.PlayerAnimator.SetFloat("Speed", speed);
+        player.ArmorAnimator.SetFloat("Speed", speed);
         player.RightClawAnimator.SetFloat("Speed", speed);
         player.LeftClawAnimator.SetFloat("Speed", speed);
 
         //Yikes...
         player.PlayerAnimator.speed = weight <= 1 ? 1 : 1 / (weight * 0.5f);
+        player.ArmorAnimator.speed = weight <= 1 ? 1 : 1 / (weight * 0.5f);
         player.LeftClawAnimator.speed = weight <= 1 ? 1 : 1 / (weight * 0.5f);
     }
 

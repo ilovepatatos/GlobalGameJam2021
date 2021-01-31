@@ -11,11 +11,14 @@ public class Shop : MonoBehaviour
     [Space] public List<ShopItem> Items;
 
     //
+    [HideInInspector] public Interacter currentInteracter;
     private Bank currentClientBank;
     private ShopItem currentSelectItem;
+    public ShopItem CurrentEquippedItem;
 
     //Event call by button
-    public void StartShopping(Bank bank, bool openSellFirst) {
+    public void StartShopping(Interacter interacter, Bank bank, bool openSellFirst) {
+        currentInteracter = interacter;
         currentClientBank = bank;
 
         RefreshItems();
@@ -60,5 +63,15 @@ public class Shop : MonoBehaviour
     public void OnBuyButtonPressed() {
         if (currentSelectItem != null)
             Buy(currentSelectItem);
+    }
+
+    public void OnEquipmentEquipped(ShopItem item) {
+        if (!(currentInteracter is Player player))
+            return;
+        if (CurrentEquippedItem)
+            CurrentEquippedItem.UnEquip();
+
+        player.Armory.Equip(item.Category);
+        CurrentEquippedItem = item;
     }
 }
