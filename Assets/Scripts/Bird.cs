@@ -3,8 +3,10 @@ using UnityEngine.Events;
 
 public class Bird : MonoBehaviour
 {
+    public SoundSettings DamagePlayerSound;
+    
     public GameObject birdVisual;
-    public GameObject Shadow;
+    public Shadow Shadow;
     [HideInInspector]public Player PlayerReference;
 
     [Space] 
@@ -32,9 +34,12 @@ public class Bird : MonoBehaviour
     private void InitVariables()
     {
         targetPosition = PlayerReference.gameObject.transform.position;
-        
-        initPosition = targetPosition - Vector3.right * 10;
-        retreatPosition = targetPosition + Vector3.right * 10;
+        int sign = Random.Range(0, 2) > 0 ? 1 : -1;
+        initPosition = targetPosition - Vector3.right * 2 * sign;
+        retreatPosition = targetPosition + Vector3.right * 20 * sign;
+        var localScale = birdVisual.transform.localScale;
+        localScale.x *= sign;
+        birdVisual.transform.localScale = localScale;
     }
 
     private void SetInitialPositions()
@@ -45,18 +50,28 @@ public class Bird : MonoBehaviour
 
     private void InitToTarget()
     {
-        var toTargetTransition = LeanTween.value(birdVisual, initPosition, targetPosition, 2f);
+        var toTargetTransition = LeanTween.value(birdVisual, initPosition, targetPosition, 1f);
         toTargetTransition.setOnUpdate((Vector3 f) => birdVisual.transform.position = f);
         toTargetTransition.setOnComplete(() =>
         {
             OnReachedTarget?.Invoke();
             TargetToRetreat();
+          
+            if(Shadow.IsPlayerInZone())
+            {
+                if (!PlayerReference.Bank.TryWithdraw(50))
+                    PlayerReference.Bank.TryWithdraw(PlayerReference.Bank.MoneyAmount);
+                SoundManager.PlayOneShot(DamagePlayerSound);
+            }
+            
+            Shadow.gameObject.SetActive(false);
         });
     }
+    
 
     private void TargetToRetreat()
     {
-        var toTargetTransition = LeanTween.value(birdVisual, targetPosition, retreatPosition, 2f);
+        var toTargetTransition = LeanTween.value(birdVisual, targetPosition, retreatPosition, 4f);
         toTargetTransition.setOnUpdate((Vector3 f) =>
         {
             birdVisual.transform.position = f;
