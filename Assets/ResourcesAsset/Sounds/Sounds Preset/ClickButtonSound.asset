@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 627b4b8891fc9da4a95cdc971dc53ba7, type: 3}
-  m_Name: HoverButtonSound
+  m_Name: ClickButtonSound
   m_EditorClassIdentifier: 
-  Clip: {fileID: 0}
-  Volume: 1
+  Clip: {fileID: 8300000, guid: c7ff994a431bb1547af461969c794c7e, type: 3}
+  Volume: 0.5

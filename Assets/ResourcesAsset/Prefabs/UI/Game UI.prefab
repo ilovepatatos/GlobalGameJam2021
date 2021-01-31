@@ -606,17 +606,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8274992549432405943}
     m_Modifications:
-    - target: {fileID: 2795399060634768704, guid: 5d2efe4133406754eb49ad746f9e14cf, type: 3}
-      propertyPath: m_fontSize
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 2797443045843367666, guid: 5d2efe4133406754eb49ad746f9e14cf, type: 3}
       propertyPath: m_Name
       value: Shop UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 7059996458002924273, guid: 5d2efe4133406754eb49ad746f9e14cf, type: 3}
-      propertyPath: m_fontSize
-      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8777832478088846624, guid: 5d2efe4133406754eb49ad746f9e14cf, type: 3}
       propertyPath: m_Pivot.x

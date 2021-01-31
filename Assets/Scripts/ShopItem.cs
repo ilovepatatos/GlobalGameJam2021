@@ -16,6 +16,10 @@ public class ShopItem : Item
     [SerializeField] private Color selectedColor;
     [SerializeField] private Color unselectedColor;
 
+    [Space] 
+    public SoundSettings OnClickSound;
+    public SoundSettings OnHoverSound;
+
     [HideInInspector] public bool HasBeenBought;
 
     private Button button;
@@ -28,12 +32,18 @@ public class ShopItem : Item
     }
 
     public void OnButtonClick() {
+        SoundManager.PlayOneShot(OnClickSound);
+        
         if (!myShop) {
             Debug.LogWarning("Missing shop exception!");
             return;
         }
 
         myShop.SelectItem(this);
+    }
+    
+    public void OnHoverButton() {
+        SoundManager.PlayOneShot(OnHoverSound);
     }
 
     public override void Buy(Bank bank) {
