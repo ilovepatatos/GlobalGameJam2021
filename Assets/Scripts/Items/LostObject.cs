@@ -17,6 +17,7 @@ public class LostObject : Interactable
     public SoundSettings OnDropSound;
 
     public Action<Interactable> OnPlayerInteractionStart;
+    public Action<Interactable> OnDestroyEvent;
     
     private Rigidbody2D rb;
     private Player player;
@@ -54,5 +55,10 @@ public class LostObject : Interactable
     private void SetPositionFromInteracter(Interacter interacter) {
         Transform t = interacter.transform;
         transform.position = t.position + t.up * CarryDistance;
+    }
+
+    public override void OnDestroy()
+    {
+        OnDestroyEvent?.Invoke(this);
     }
 }
