@@ -6,6 +6,11 @@ public class Bird : MonoBehaviour
     public GameObject birdVisual;
     public GameObject Shadow;
     [HideInInspector]public Player PlayerReference;
+
+    [Space] 
+    public Animator BirdAnimator;
+    public Animator BecAnimator;
+    public Animator ShadowAnimator;
     
     private Vector3 targetPosition;
     private Vector3 initPosition;
@@ -18,6 +23,10 @@ public class Bird : MonoBehaviour
         InitVariables();
         SetInitialPositions();
         InitToTarget();
+
+        OnReachedTarget.AddListener(() => { BirdAnimator.SetTrigger("Attack"); });
+        OnReachedTarget.AddListener(() => { BecAnimator.SetTrigger("Attack"); });
+        OnReachedTarget.AddListener(() => { ShadowAnimator.SetTrigger("Play_Reverse"); });
     }
 
     private void InitVariables()
