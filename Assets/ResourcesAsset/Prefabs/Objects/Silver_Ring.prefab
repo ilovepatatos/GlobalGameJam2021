@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2216259077377391041}
   - component: {fileID: 5095638776010673868}
   m_Layer: 7
-  m_Name: Golden_Ring
+  m_Name: Silver_Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 1873549153
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: -6113044398000555865, guid: 0c819175b0de2184aa471de60354da96, type: 3}
+  m_Sprite: {fileID: -6153533318589130845, guid: 0c819175b0de2184aa471de60354da96, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -154,10 +154,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Interacter: {fileID: 0}
-  ShortName: Golden Ring
-  Price: 150
+  ShortName: Silver Ring
+  Price: 100
   Weight: 3
-  Description: A beautifull ring worth 1000$
+  Description: A beautiful ring, but don't let it rust
   CarryDistance: 0.8
   OnPickupSound: {fileID: 11400000, guid: 41cbb5dcd38f61d46910b2407c2a2d2f, type: 2}
   OnDropSound: {fileID: 11400000, guid: 9a7883a095b6b1942944664522bcb871, type: 2}

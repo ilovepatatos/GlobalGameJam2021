@@ -1,22 +1,13 @@
 fileFormatVersion: 2
-guid: 0c819175b0de2184aa471de60354da96
+guid: 912612999c687bd4abf96f811df93e60
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6113044398000555865
-    second: Bague_0
+      213: -3888829101451381303
+    second: beer_cap_0
   - first:
-      213: -3632146865423982303
-    second: Bague_1
-  - first:
-      213: -6153533318589130845
-    second: Bague_2
-  - first:
-      213: -8324361993401766487
-    second: Bague_3
-  - first:
-      213: -2053087082210567060
-    second: Bague_4
+      213: 4688948873819843338
+    second: beer_cap_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -80,7 +71,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 256
+    maxTextureSize: 128
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -92,7 +83,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 256
+    maxTextureSize: 128
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -140,7 +131,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
-    maxTextureSize: 256
+    maxTextureSize: 128
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -154,13 +145,34 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bague_0
+      name: beer_cap_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c5f9cf398a180ac0800000000000000
+      internalID: -3888829101451381303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beer_cap_1
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 48
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,92 +180,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a83cf0228a1a2ba0800000000000000
-      internalID: -6113044398000555865
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bague_1
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 48
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 121ea5a7ba5089dc0800000000000000
-      internalID: -3632146865423982303
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bague_2
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 48
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3a7d6ffac024a9aa0800000000000000
-      internalID: -6153533318589130845
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bague_3
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 0
-        width: 48
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9ad66811fdce97c80800000000000000
-      internalID: -8324361993401766487
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bague_4
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 48
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c6c55eb2d28f183e0800000000000000
-      internalID: -2053087082210567060
+      spriteID: a0beff9582e721140800000000000000
+      internalID: 4688948873819843338
       vertices: []
       indices: 
       edges: []
@@ -261,7 +189,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 17efc54a53121bc4db7c5491c486bb3b
+    spriteID: fcaf372d8412a054d87815326e33318f
     internalID: 0
     vertices: []
     indices: 

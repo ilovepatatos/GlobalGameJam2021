@@ -4,7 +4,7 @@ public class SoundManager : MonoBehaviour
 {
 #region Singleton
 
-    private static SoundManager instance = null;
+    private static SoundManager instance;
 
     private void Awake() {
         instance = this;
@@ -16,6 +16,7 @@ public class SoundManager : MonoBehaviour
 
     public static void PlayOneShot(SoundSettings sound) {
         if (!sound) return;
+        if (!instance) return;
         instance.Effects.PlayOneShot(sound.Clip, sound.Volume);
     }
 }

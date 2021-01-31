@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -15,6 +16,8 @@ public class LostObject : Interactable
     public SoundSettings OnPickupSound;
     public SoundSettings OnDropSound;
 
+    public Action<Interactable> OnPlayerInteractionStart;
+    
     private Rigidbody2D rb;
     private Player player;
 
@@ -28,6 +31,7 @@ public class LostObject : Interactable
         
         if (!(interacter is Player p)) return;
         
+        OnPlayerInteractionStart?.Invoke(this);
         //Set Player Joint
         player = p;
         player.Joint.connectedBody = rb;
