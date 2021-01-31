@@ -5,6 +5,8 @@ public class LostObject : Interactable
 {
     [Header("Lost Object")] 
     public string ShortName;
+    public int Price = 100;
+    public float Weight = 10;
     [TextArea] public string Description;
 
     public float CarryDistance;
@@ -14,6 +16,7 @@ public class LostObject : Interactable
     public SoundSettings OnDropSound;
 
     private Rigidbody2D rb;
+    private Player player;
 
     private void Awake() {
         name = ShortName;
@@ -23,10 +26,10 @@ public class LostObject : Interactable
     public override void OnInteractionStart(Interacter interacter) {
         base.OnInteractionStart(interacter);
         
-        if (!(interacter is Player)) return;
+        if (!(interacter is Player p)) return;
         
         //Set Player Joint
-        Player player = interacter as Player;
+        player = p;
         player.Joint.connectedBody = rb;
         
         SetPositionFromInteracter(interacter);
@@ -38,6 +41,10 @@ public class LostObject : Interactable
         base.OnInteractionStop();
         rb.velocity = Vector2.zero;
         SoundManager.PlayOneShot(OnDropSound);
+    }
+
+    public void Sell() {
+        //TODO destroy animation
     }
 
     private void SetPositionFromInteracter(Interacter interacter) {

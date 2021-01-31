@@ -128,6 +128,7 @@ MonoBehaviour:
   PlayerAnimator: {fileID: 7264235717193860890}
   LeftClawAnimator: {fileID: 1456891663374968813}
   RightClawAnimator: {fileID: 4760189235995630408}
+  Bank: {fileID: 0}
 --- !u!1 &5232977551068658473
 GameObject:
   m_ObjectHideFlags: 0

@@ -63,8 +63,8 @@ public class Interacter : MonoBehaviour
         InteractLayer = LayerMask.GetMask("Interactable");
 
         OnInteractionFail += () => { SoundManager.PlayOneShot(InteractErrorSound); };
-        OnInteractableEnterRange += obj => { Debug.Log($"{obj.name} entered interactable range"); };
-        OnInteractableLeaveRange += obj => { Debug.Log($"{obj.name} left interactable range..."); };
+        //OnInteractableEnterRange += obj => { Debug.Log($"{obj.name} entered interactable range"); };
+        //OnInteractableLeaveRange += obj => { Debug.Log($"{obj.name} left interactable range..."); };
     }
 
     protected virtual void Update() {

@@ -51,4 +51,8 @@ public class PlayerInfoManager : MonoBehaviour
         Info.SetMixerVolume(audioMixerType, value);
     }
 
+    public static void SetCoins(int amount) {
+        Instance.info.coins = amount;
+    }
+
 }

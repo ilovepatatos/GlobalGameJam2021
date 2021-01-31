@@ -1,6 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(PlayerBank))]
 public class Player : Interacter
 {
     [Header("Player")] 
@@ -11,15 +12,21 @@ public class Player : Interacter
     public Animator PlayerAnimator;
     public Animator LeftClawAnimator, RightClawAnimator;
         
+    [HideInInspector] public PlayerBank Bank;
     private PlayerMovement playerMovement;
 
     public PlayerInputPck Input = new PlayerInputPck();
 
     public bool IsCarryingObject => CurrentInteractableSelected is LostObject;
+    public LostObject ObjectCarrying => CurrentInteractableSelected as LostObject;
 
     protected override void Awake() {
         base.Awake();
         playerMovement = GetComponent<PlayerMovement>();
+        Bank = GetComponent<PlayerBank>();
+
+        OnInteractableEnterRange += obj => { UIManager.SetInteractPopupActive(true); };
+        OnInteractableLeaveRange += obj => { UIManager.SetInteractPopupActive(false); };
     }
 
     protected override void Update() {
@@ -32,6 +39,7 @@ public class Player : Interacter
 
     protected override void OnInteraction(Interactable interactable) {
         base.OnInteraction(interactable);
+        UIManager.SetInteractPopupActive(false);
 
         if (CurrentInteractableSelected is LostObject obj) {
             RightClawAnimator.SetBool("IsCarryingObject", true);

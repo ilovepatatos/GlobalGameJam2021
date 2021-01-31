@@ -155,6 +155,6 @@ MonoBehaviour:
   Interacter: {fileID: 0}
   ShortName: Golden Ring
   Description: A beautifull ring worth 1000$
-  CarryDistance: 5.5
+  CarryDistance: 0.8
   OnPickupSound: {fileID: 11400000, guid: 41cbb5dcd38f61d46910b2407c2a2d2f, type: 2}
   OnDropSound: {fileID: 11400000, guid: 9a7883a095b6b1942944664522bcb871, type: 2}

@@ -7,7 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public float Speed = 5;
     [HideInInspector] public bool IsPlayerMoving;
-    [HideInInspector] public bool EnableMultiDirectionMovement = true;
+    [HideInInspector] public bool EnableMultiDirectionMovement;
+    private bool IsMovementEnable = true;
 
     private Player player;
     [HideInInspector] public Rigidbody2D Rb;
@@ -43,12 +44,18 @@ public class PlayerMovement : MonoBehaviour
         onInteractionInitialRotation = To180Angle(Rb.rotation);
     }
 
+    public void SetEnableMovement(bool enable) {
+        IsMovementEnable = false;
+    }
+
     private void Awake() {
         player = GetComponent<Player>();
         Rb = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate() {
+        if (!IsMovementEnable)
+            return;
         Vector2 dir = player.Input.MovementDirection;
 
         if (player.IsCarryingObject)
@@ -69,7 +76,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateMovement(Vector2 dir, float delta) {
         ResolveMovement(dir);
-        Rb.MovePosition((Vector2) transform.position + dir.normalized * (delta * Speed));
+        float weight = player.IsCarryingObject ? player.ObjectCarrying.Weight : 1;
+        Rb.MovePosition((Vector2) transform.position + dir.normalized * (delta * (Speed / weight)));
     }
 
     private void ResolveMovement(Vector2 dir) {
@@ -120,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsRotationWithinRange(float rotation, float min, float max) {
         float angle = To180Angle(rotation) - onInteractionInitialRotation;
-        if (angle <= -315 && angle > -360) return true;    //Its a game jam ok! I was close, don't judge... -_-
+        if (angle <= -315 && angle > -360) return true; //Its a game jam ok! I was close, don't judge... -_-
         return angle >= min && angle <= max;
     }
 
