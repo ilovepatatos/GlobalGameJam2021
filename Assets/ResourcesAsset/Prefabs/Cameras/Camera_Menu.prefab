@@ -306,8 +306,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411557330966935201}
-  - component: {fileID: 2923459410460812920}
   - component: {fileID: 7012729724654538465}
+  - component: {fileID: 2923459410460812920}
+  - component: {fileID: 7435676536942392878}
   m_Layer: 0
   m_Name: Timeline
   m_TagString: Untagged
@@ -329,6 +330,25 @@ Transform:
   m_Father: {fileID: 946912885929102143}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &7012729724654538465
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8925079256480628460}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!320 &2923459410460812920
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -354,22 +374,18 @@ PlayableDirector:
     value: {fileID: 8374864374981303906}
   m_ExposedReferences:
     m_References: []
---- !u!95 &7012729724654538465
-Animator:
-  serializedVersion: 3
+--- !u!114 &7435676536942392878
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8925079256480628460}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5497e96e5f39fa14191dfb4f3ff6053f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnTimelineStop:
+    m_PersistentCalls:
+      m_Calls: []
