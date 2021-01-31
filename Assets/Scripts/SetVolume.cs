@@ -20,6 +20,17 @@ public class SetVolume : MonoBehaviour
         mixerProperty = Global.MixerProperty[exposedValue];
     }
 
+    private void OnEnable()
+    {
+        SetSliderValue();
+    }
+
+    public void SetSliderValue()
+    {
+        if(PlayerInfoManager.Instance)
+            SetSliderValue(PlayerInfoManager.Instance.GetMixerVolume(exposedValue));
+    }
+
     public void SetLevel(float sliderValue) {
         mixer.SetFloat(mixerProperty, Mathf.Log10(sliderValue) * 20);
         PlayerInfoManager.Instance.SetMixerVolume(exposedValue, sliderValue);

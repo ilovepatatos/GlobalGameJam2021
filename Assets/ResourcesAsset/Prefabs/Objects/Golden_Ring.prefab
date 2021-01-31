@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5095638776010673867}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.81, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -102,7 +102,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5, y: 1}
+    oldSize: {x: 1, y: 0.6666667}
     newSize: {x: 1.5, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -110,15 +110,16 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.5709479, y: 0.05745673}
-      - {x: 0.39013076, y: 0.27476025}
-      - {x: 0.14518845, y: 0.41702437}
-      - {x: -0.18389422, y: 0.4072516}
-      - {x: -0.44109905, y: 0.20097089}
-      - {x: -0.44042778, y: -0.014381766}
-      - {x: -0.13029407, y: -0.32150722}
-      - {x: 0.31428862, y: -0.34601164}
-      - {x: 0.576257, y: -0.12872219}
+    - - {x: 0.37572616, y: 0.05414789}
+      - {x: 0.21853605, y: 0.2201488}
+      - {x: 0.05989623, y: 0.26809543}
+      - {x: -0.122689724, y: 0.26864088}
+      - {x: -0.28570604, y: 0.14770317}
+      - {x: -0.2819285, y: 0.010252982}
+      - {x: -0.17801148, y: -0.110457696}
+      - {x: 0.0046067014, y: -0.23082536}
+      - {x: 0.20742464, y: -0.22812706}
+      - {x: 0.37607452, y: -0.08405281}
 --- !u!50 &2216259077377391041
 Rigidbody2D:
   serializedVersion: 4
@@ -154,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Interacter: {fileID: 0}
   ShortName: Golden Ring
-  Price: 100
+  Price: 150
   Weight: 3
   Description: A beautifull ring worth 1000$
   CarryDistance: 0.8

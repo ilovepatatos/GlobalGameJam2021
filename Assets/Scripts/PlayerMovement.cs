@@ -133,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
     private bool CanMoveTowardDirection(Vector2 dir) {
         if (!zAxisRotationPresetsInvert.ContainsKey(new Vector2((int) dir.x, (int) dir.y))) 
             return false;
-        return IsRotationWithinRange(zAxisRotationPresetsInvert[dir], -45, 45);
+        return IsRotationWithinRange(zAxisRotationPresetsInvert[new Vector2((int) dir.x, (int) dir.y)], -45, 45);
     }
 
     private bool IsRotationWithinRange(float rotation, float min, float max) {
