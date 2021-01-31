@@ -30,10 +30,22 @@ public class UIManager : MonoBehaviour
     public SetVolume Effect;
     public SetVolume Ambient;
 
+    [Space] 
+    public GameObject CoinCanvas_InGame;
+    public GameObject PauseButton;
+
     public static void SetInteractPopupActive(bool activate) {
         if(activate)
             Instance.InteractPopup.PopUp();
         else
             Instance.InteractPopup.PopDown();
+    }
+
+    public static void SetPauseButtonActive(bool activate) {
+        Instance.PauseButton.SetActive(activate);
+    }
+
+    public static void SetInGameCoinActive(bool activate) {
+        Instance.CoinCanvas_InGame.SetActive(activate);
     }
 }

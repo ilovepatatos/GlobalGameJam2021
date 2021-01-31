@@ -6,18 +6,15 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class ShopItem : Item
 {
-    [Header("UI")] 
-    public TMP_Text PriceText;
-    
-    [Space]
-    [SerializeField] private Color boughtColor;
+    [Header("UI")] public TMP_Text PriceText;
+
+    [Space] [SerializeField] private Color boughtColor;
     [SerializeField] private Color canAffordColor;
     [SerializeField] private Color cantAffordColor;
     [SerializeField] private Color selectedColor;
     [SerializeField] private Color unselectedColor;
 
-    [Space] 
-    public SoundSettings OnClickSound;
+    [Space] public SoundSettings OnClickSound;
     public SoundSettings OnHoverSound;
 
     [HideInInspector] public bool HasBeenBought;
@@ -33,7 +30,7 @@ public class ShopItem : Item
 
     public void OnButtonClick() {
         SoundManager.PlayOneShot(OnClickSound);
-        
+
         if (!myShop) {
             Debug.LogWarning("Missing shop exception!");
             return;
@@ -41,7 +38,7 @@ public class ShopItem : Item
 
         myShop.SelectItem(this);
     }
-    
+
     public void OnHoverButton() {
         SoundManager.PlayOneShot(OnHoverSound);
     }
@@ -73,7 +70,8 @@ public class ShopItem : Item
     }
 
     public void Unselect(Bank bank) {
-        SetButtonColor(bank.HasAmount(Price) ? canAffordColor : cantAffordColor);
+        if (!HasBeenBought)
+            SetButtonColor(bank.HasAmount(Price) ? canAffordColor : cantAffordColor);
     }
 
     private void SetButtonColor(Color color) {
