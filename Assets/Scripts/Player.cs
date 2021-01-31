@@ -34,7 +34,7 @@ public class Player : Interacter
             ResolveInteraction();
         if (DialogManager.IsDialogPlaying())
             if (Input.Mouse0 || Input.Space)
-                DialogManager.CurrentDialog.Next();
+                DialogManager.CurrentDialog.CompleteSentence();
     }
 
     protected override void OnInteraction(Interactable interactable) {

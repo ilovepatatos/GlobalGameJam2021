@@ -42,4 +42,9 @@ public class Dialog
         DialogManager.TypeSentence(Sentences[currentSenteceIndex], DelayBetweenChar, TypeCharacterSound);
         currentSenteceIndex++;
     }
+
+    public void CompleteSentence() {
+        if(!DialogManager.TryCompleteSentence(Sentences[currentSenteceIndex - 1]))
+            Next();
+    }
 }
