@@ -86,10 +86,6 @@ public class Merchant : Interactable
         filter.useTriggers = true;
 
         SellingZone.OverlapCollider(filter, hits);
-
-        foreach (Collider2D hit in hits) {
-            Debug.Log($"Hit {hit.transform}");
-        }
         return hits.Count <= 2;
     }
 }

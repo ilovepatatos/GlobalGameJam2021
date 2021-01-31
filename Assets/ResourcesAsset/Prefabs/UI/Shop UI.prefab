@@ -968,6 +968,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19942e340a6f1b54a8446f8d4c33aad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WinDialog:
+    IsPlaying: 0
+    DelayBetweenChar: 0.05
+    TypeCharacterSound: {fileID: 11400000, guid: bf4e6fcccbb80864ba0de57091de299e, type: 2}
+    CharacterName: Game
+    Sentences:
+    - Congrats you completed our game.
+    - Feel free to keep looking around, thx for playing <
   ShopCanvas: {fileID: 2797443045843367666}
   MoneyText: {fileID: 2795399060634768704}
   BuyCanvas: {fileID: 4196339166484513373}
@@ -979,6 +987,7 @@ MonoBehaviour:
   - {fileID: 683501606370817665}
   - {fileID: 8560181824523476360}
   currentInteracter: {fileID: 0}
+  CurrentEquippedItem: {fileID: 0}
 --- !u!1 &3527670866580450612
 GameObject:
   m_ObjectHideFlags: 0

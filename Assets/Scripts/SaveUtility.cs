@@ -6,7 +6,7 @@ public static class SaveUtility
     {
         PlayerPrefs.SetString(key, JsonUtility.ToJson(toSave));
         PlayerPrefs.Save();
-        Debug.Log("saved");
+        Debug.Log($"saved {JsonUtility.ToJson(toSave)}");
     }
     public static T Load<T>(string key = "save")
     {

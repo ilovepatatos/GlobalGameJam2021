@@ -27,21 +27,20 @@ public class ShopItem : Item
     }
 
     private void Start() {
-        if (UnlockOnStart) {
+        if (UnlockOnStart || PlayerInfoManager.IsUnlockFromSave(Category)) {
             HasBeenBought = true;
             PriceText.text = "Equipped";
             SetButtonEnable(false);
             SetButtonColor(boughtColor);
             myShop.CurrentEquippedItem = this;
+            PlayerInfoManager.UnlockArmor(Category);
         }
     }
 
     public void OnButtonClick() {
         SoundManager.PlayOneShot(OnClickSound);
-
-        Debug.Log($"OnClick {ShortName}");
+        
         if (HasBeenBought) {
-            Debug.Log("In here");
             Equip();
             button.Unselect();
             return;
@@ -91,6 +90,7 @@ public class ShopItem : Item
     private void Unlock() {
         HasBeenBought = true;
         SetButtonColor(boughtColor);
+        PlayerInfoManager.UnlockArmor(Category);
         Equip();
     }
 
