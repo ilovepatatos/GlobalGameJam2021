@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TravelTime: 0.2
-  TravelDistanceY: 59
+  TravelDistanceY: 35
   CharacterName: {fileID: 6974069205064417185}
   Sentence: {fileID: 5315740079098628919}
 --- !u!1 &6640471971860647113
