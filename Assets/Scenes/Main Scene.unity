@@ -3658,6 +3658,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 154772169}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   OnEnter:
     m_PersistentCalls:
       m_Calls:
@@ -3820,6 +3832,11 @@ Transform:
   m_Father: {fileID: 1906986522}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &154772169 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8274992549432405947, guid: 00f2c96182a0d9e4d9e073477ba15737, type: 3}
+  m_PrefabInstance: {fileID: 1250475859}
+  m_PrefabAsset: {fileID: 0}
 --- !u!320 &228196399 stripped
 PlayableDirector:
   m_CorrespondingSourceObject: {fileID: 2923459410460812920, guid: cc25901913b3ad74bbd6adcef4bfeaab, type: 3}
@@ -16946,6 +16963,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8274992549432405940, guid: 00f2c96182a0d9e4d9e073477ba15737, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 505610939}
     - target: {fileID: 8274992549432405943, guid: 00f2c96182a0d9e4d9e073477ba15737, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -17033,6 +17054,10 @@ PrefabInstance:
     - target: {fileID: 8274992549432405947, guid: 00f2c96182a0d9e4d9e073477ba15737, type: 3}
       propertyPath: m_Name
       value: Game UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8274992549432405947, guid: 00f2c96182a0d9e4d9e073477ba15737, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00f2c96182a0d9e4d9e073477ba15737, type: 3}
@@ -18425,7 +18450,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1971395364}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071067}
-  m_LocalPosition: {x: 0.9220793, y: -19.39784, z: -5}
+  m_LocalPosition: {x: 0.9220793, y: -11.3978405, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1591412785}
