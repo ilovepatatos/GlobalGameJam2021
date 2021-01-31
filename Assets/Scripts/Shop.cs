@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
-    [Header("Shop")] public GameObject ShopCanvas;
+    [Header("Shop")] public Dialog WinDialog;
+
+    [Space] public GameObject ShopCanvas;
     public TMP_Text MoneyText;
     public GameObject BuyCanvas, SellCanvas;
 
@@ -14,7 +16,7 @@ public class Shop : MonoBehaviour
     [HideInInspector] public Interacter currentInteracter;
     private Bank currentClientBank;
     private ShopItem currentSelectItem;
-    public ShopItem CurrentEquippedItem;
+    [HideInInspector] public ShopItem CurrentEquippedItem;
 
     //Event call by button
     public void StartShopping(Interacter interacter, Bank bank, bool openSellFirst) {
@@ -61,8 +63,15 @@ public class Shop : MonoBehaviour
     }
 
     public void OnBuyButtonPressed() {
-        if (currentSelectItem != null)
-            Buy(currentSelectItem);
+        if (!currentSelectItem)
+            return;
+
+        Buy(currentSelectItem);
+        if (AmountItemsMissing() <= 0) {
+            WinDialog.Start();
+            StopShopping();
+            currentInteracter.TryTerminateInteraction();
+        }
     }
 
     public void OnEquipmentEquipped(ShopItem item) {
@@ -73,5 +82,14 @@ public class Shop : MonoBehaviour
 
         player.Armory.Equip(item.Category);
         CurrentEquippedItem = item;
+    }
+
+    private int AmountItemsMissing() {
+        int amount = 0;
+        foreach (ShopItem item in Items) {
+            if (!item.HasBeenBought)
+                amount++;
+        }
+        return amount;
     }
 }

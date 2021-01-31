@@ -9,6 +9,6 @@ public class StartDelayed : MonoBehaviour
     public float Max;
     
     private void Start() {
-        //GetComponent<AudioSource>().PlayDelayed(Random.Range(Min, Max));
+        GetComponent<AudioSource>().PlayDelayed(Random.Range(Min, Max + 1));
     }
 }

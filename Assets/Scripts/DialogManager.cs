@@ -33,6 +33,7 @@ public class DialogManager : MonoBehaviour
 
     public static void PrepareDialogBox(Dialog dialog, Action action) {
         CurrentDialog = dialog;
+        Instance.DialogComponent.CharacterName.text = dialog.CharacterName;
         Instance.DialogComponent.Sentence.text = "";
         Instance.DialogComponent.OnPopUpStop = action;
         Instance.DialogComponent.PopUp();
