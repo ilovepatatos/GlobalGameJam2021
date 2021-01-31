@@ -21,9 +21,12 @@ public class UIManager : MonoBehaviour
 #endregion
 
     [Header("UI")] 
-    public GameObject InteractPopup;
+    public InteractPopup InteractPopup;
 
     public static void SetInteractPopupActive(bool activate) {
-        Instance.InteractPopup.SetActive(activate);
+        if(activate)
+            Instance.InteractPopup.PopUp();
+        else
+            Instance.InteractPopup.PopDown();
     }
 }

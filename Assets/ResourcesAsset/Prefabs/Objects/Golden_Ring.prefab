@@ -154,6 +154,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Interacter: {fileID: 0}
   ShortName: Golden Ring
+  Price: 100
+  Weight: 3
   Description: A beautifull ring worth 1000$
   CarryDistance: 0.8
   OnPickupSound: {fileID: 11400000, guid: 41cbb5dcd38f61d46910b2407c2a2d2f, type: 2}

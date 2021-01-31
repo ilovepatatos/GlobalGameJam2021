@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public float Speed = 5;
     [HideInInspector] public bool IsPlayerMoving;
     [HideInInspector] public bool EnableMultiDirectionMovement;
-    private bool IsMovementEnable = true;
+    private bool IsMovementEnable;
 
     private Player player;
     [HideInInspector] public Rigidbody2D Rb;
@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void SetEnableMovement(bool enable) {
-        IsMovementEnable = false;
+        IsMovementEnable = enable;
     }
 
     private void Awake() {
@@ -57,26 +57,32 @@ public class PlayerMovement : MonoBehaviour
         if (!IsMovementEnable)
             return;
         Vector2 dir = player.Input.MovementDirection;
+        float weight = 1;
 
-        if (player.IsCarryingObject)
+        if (player.IsCarryingObject) {
+            weight = player.ObjectCarrying.Weight;
             if (!CanMoveTowardDirection(dir))
                 dir = Vector2.zero;
+        }
 
         UpdateRotation(dir);
-        UpdateMovement(dir, Time.fixedDeltaTime);
-        UpdateAnimator(dir);
+        UpdateMovement(dir, weight, Time.fixedDeltaTime);
+        UpdateAnimator(dir, weight);
     }
 
-    private void UpdateAnimator(Vector2 dir) {
+    private void UpdateAnimator(Vector2 dir, float weight) {
         float speed = Math.Max(Math.Abs(dir.x), Math.Abs(dir.y));
         player.PlayerAnimator.SetFloat("Speed", speed);
         player.RightClawAnimator.SetFloat("Speed", speed);
         player.LeftClawAnimator.SetFloat("Speed", speed);
+
+        //Yikes...
+        player.PlayerAnimator.speed = weight <= 1 ? 1 : 1 / (weight * 0.5f);
+        player.LeftClawAnimator.speed = weight <= 1 ? 1 : 1 / (weight * 0.5f);
     }
 
-    private void UpdateMovement(Vector2 dir, float delta) {
+    private void UpdateMovement(Vector2 dir, float weight, float delta) {
         ResolveMovement(dir);
-        float weight = player.IsCarryingObject ? player.ObjectCarrying.Weight : 1;
         Rb.MovePosition((Vector2) transform.position + dir.normalized * (delta * (Speed / weight)));
     }
 
