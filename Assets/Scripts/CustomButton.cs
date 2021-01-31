@@ -1,4 +1,5 @@
-﻿using UnityEngine.Events;
+﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class CustomButton : UnityEngine.UI.Button
@@ -7,7 +8,8 @@ public class CustomButton : UnityEngine.UI.Button
     public UnityEvent OnDown = new UnityEvent();
     public UnityEvent OnUp = new UnityEvent();
     public UnityEvent OnExit = new UnityEvent();
-    
+
+    public void Unselect() => FindObjectOfType<EventSystem>().SetSelectedGameObject(null);
 
     public override void OnPointerEnter(PointerEventData eventData)
     {

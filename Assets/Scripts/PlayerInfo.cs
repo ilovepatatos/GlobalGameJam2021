@@ -9,7 +9,6 @@ public class PlayerInfo
     public float effectVolume = 0.5f;
     public float ambientVolume = 0.5f;
     
-    
     public float GetMixerVolume(AudioMixerType audioMixerType)
     {
         switch (audioMixerType)
