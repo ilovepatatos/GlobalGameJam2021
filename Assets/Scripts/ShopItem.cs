@@ -93,6 +93,7 @@ public class ShopItem : Item
         HasBeenBought = true;
         SetButtonColor(boughtColor);
         PlayerInfoManager.UnlockArmor(Category);
+        PlayerInfoManager.Instance.Save();
         SoundManager.PlayOneShot(UnlockItemSound);
         Equip();
     }

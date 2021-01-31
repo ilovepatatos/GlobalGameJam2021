@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Ouch
   m_EditorClassIdentifier: 
   Clip: {fileID: 8300000, guid: 2f1d68f98c3ad2246a3925f9646ff36a, type: 3}
-  Volume: 1
+  Volume: 0.4
