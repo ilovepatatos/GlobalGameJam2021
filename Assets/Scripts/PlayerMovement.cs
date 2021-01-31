@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private Player player;
     [HideInInspector] public Rigidbody2D Rb;
     private float onInteractionInitialRotation;
+    private Vector2 onInteractionInitialRotationDirection;
 
     public event Action OnPlayerStartMoving, OnPlayerStopMoving;
 
@@ -42,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnPickupObject() {
         onInteractionInitialRotation = To180Angle(Rb.rotation);
+        onInteractionInitialRotationDirection = -transform.up;
     }
 
     public void SetEnableMovement(bool enable) {
@@ -58,6 +60,8 @@ public class PlayerMovement : MonoBehaviour
             return;
         Vector2 dir = player.Input.MovementDirection;
         float weight = 1;
+        
+        dir = ResolveDirection(dir);
 
         if (player.IsCarryingObject) {
             weight = player.ObjectCarrying.Weight;
@@ -127,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private bool CanMoveTowardDirection(Vector2 dir) {
-        if (!zAxisRotationPresetsInvert.ContainsKey(dir))
+        if (!zAxisRotationPresetsInvert.ContainsKey(new Vector2((int) dir.x, (int) dir.y))) 
             return false;
         return IsRotationWithinRange(zAxisRotationPresetsInvert[dir], -45, 45);
     }
@@ -136,6 +140,27 @@ public class PlayerMovement : MonoBehaviour
         float angle = To180Angle(rotation) - onInteractionInitialRotation;
         if (angle <= -315 && angle > -360) return true; //Its a game jam ok! I was close, don't judge... -_-
         return angle >= min && angle <= max;
+    }
+
+    private Vector2 ResolveDirection(Vector2 dir) {
+        if (!player.IsCarryingObject)
+            return dir;
+        if (dir.y.Equals(-1))
+            return BuildDirectionVector(dir);
+        return Vector2.zero;
+    }
+
+    private Vector2 BuildDirectionVector(Vector2 dir) {
+        Vector2 vec = onInteractionInitialRotationDirection;
+
+        float xDistanceTo0 = Math.Abs(vec.x);
+        float yDistanceTo0 = Math.Abs(vec.y);
+        
+        if (xDistanceTo0 < yDistanceTo0)
+            vec.x = dir.x;
+        else
+            vec.y = -dir.x;
+        return vec;
     }
 
     // Returns an angle between [-180, 180]
