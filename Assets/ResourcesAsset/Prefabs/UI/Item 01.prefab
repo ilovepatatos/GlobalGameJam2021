@@ -65,9 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '100
-
-'
+  m_text: Equipped
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dd23d899d0819d84587f872aa339c529, type: 2}
   m_sharedMaterial: {fileID: 3325067543794487376, guid: dd23d899d0819d84587f872aa339c529, type: 2}
@@ -94,11 +92,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 6
+  m_fontSize: 2.5
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 6
+  m_fontSizeMin: 2.5
   m_fontSizeMax: 12
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -322,6 +320,8 @@ MonoBehaviour:
   ShortName: Golden Shell
   Description: Made from gold obviously.
   Price: 100
+  Category: 0
+  UnlockOnStart: 0
   PriceText: {fileID: 4267858386016929302}
   boughtColor: {r: 0.19607845, g: 0.5647059, b: 0.08627451, a: 1}
   canAffordColor: {r: 0.754717, g: 0.62599546, b: 0.10323961, a: 1}

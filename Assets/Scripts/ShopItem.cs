@@ -1,12 +1,11 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-[RequireComponent(typeof(Button))]
+[RequireComponent(typeof(CustomButton))]
 public class ShopItem : Item
 {
-    [Header("UI")] public TMP_Text PriceText;
+    [Header("UI")] public bool UnlockOnStart = false;
+    public TMP_Text PriceText;
 
     [Space] [SerializeField] private Color boughtColor;
     [SerializeField] private Color canAffordColor;
@@ -19,17 +18,34 @@ public class ShopItem : Item
 
     [HideInInspector] public bool HasBeenBought;
 
-    private Button button;
-    private Shop myShop;
+    private CustomButton button;
+    public Shop myShop;
 
     private void Awake() {
-        button = GetComponent<Button>();
-        button.onClick.AddListener(OnButtonClick);
+        button = GetComponent<CustomButton>();
         PriceText.text = Price.ToString();
+    }
+
+    private void Start() {
+        if (UnlockOnStart) {
+            HasBeenBought = true;
+            PriceText.text = "Equipped";
+            SetButtonEnable(false);
+            SetButtonColor(boughtColor);
+            myShop.CurrentEquippedItem = this;
+        }
     }
 
     public void OnButtonClick() {
         SoundManager.PlayOneShot(OnClickSound);
+
+        Debug.Log($"OnClick {ShortName}");
+        if (HasBeenBought) {
+            Debug.Log("In here");
+            Equip();
+            button.Unselect();
+            return;
+        }
 
         if (!myShop) {
             Debug.LogWarning("Missing shop exception!");
@@ -45,9 +61,7 @@ public class ShopItem : Item
 
     public override void Buy(Bank bank) {
         base.Buy(bank);
-        HasBeenBought = true;
-        SetButtonColor(boughtColor);
-        SetButtonEnable(false);
+        Unlock();
     }
 
     public void OnShopOpen(Shop shop, Bank bank) {
@@ -74,7 +88,24 @@ public class ShopItem : Item
             SetButtonColor(bank.HasAmount(Price) ? canAffordColor : cantAffordColor);
     }
 
+    private void Unlock() {
+        HasBeenBought = true;
+        SetButtonColor(boughtColor);
+        Equip();
+    }
+
     private void SetButtonColor(Color color) {
         button.image.color = color;
+    }
+
+    private void Equip() {
+        PriceText.text = "Equipped";
+        SetButtonEnable(false);
+        myShop.OnEquipmentEquipped(this);
+    }
+
+    public void UnEquip() {
+        PriceText.text = "Equip";
+        SetButtonEnable(true);
     }
 }

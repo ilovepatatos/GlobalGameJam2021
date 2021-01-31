@@ -34,7 +34,7 @@ public class Merchant : Interactable
         player.playerMovement.SetEnableMovement(false);
         UIManager.SetPauseButtonActive(false);
         UIManager.SetInGameCoinActive(false);
-        Shop.StartShopping(player.Bank, !IsSellZoneEmpty());
+        Shop.StartShopping(interacter, player.Bank, !IsSellZoneEmpty());
     }
 
     public override void OnInteractionStop() {
@@ -87,6 +87,9 @@ public class Merchant : Interactable
 
         SellingZone.OverlapCollider(filter, hits);
 
-        return hits.Count <= 0;
+        foreach (Collider2D hit in hits) {
+            Debug.Log($"Hit {hit.transform}");
+        }
+        return hits.Count <= 2;
     }
 }

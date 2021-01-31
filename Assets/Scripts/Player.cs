@@ -4,14 +4,18 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerBank))]
 public class Player : Interacter
 {
-    [Header("Player")] public Transform Body;
+    [Header("Player")] 
+    public Transform Body;
     public FixedJoint2D Joint;
 
-    [Space] public Animator PlayerAnimator;
+    [Space] 
+    public Animator PlayerAnimator;
+    public Animator ArmorAnimator;
     public Animator LeftClawAnimator, RightClawAnimator;
 
     [HideInInspector] public PlayerBank Bank;
-    public PlayerMovement playerMovement;
+    [HideInInspector] public PlayerMovement playerMovement;
+    public Armory Armory;
 
     public PlayerInputPck Input = new PlayerInputPck();
 
@@ -23,6 +27,7 @@ public class Player : Interacter
         base.Awake();
         playerMovement = GetComponent<PlayerMovement>();
         Bank = GetComponent<PlayerBank>();
+        Armory.player = this;
 
         OnInteractableEnterRange += obj => { UIManager.SetInteractPopupActive(true); };
         OnInteractableLeaveRange += obj => { UIManager.SetInteractPopupActive(false); };
