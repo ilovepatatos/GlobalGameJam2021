@@ -50,6 +50,9 @@ TagManager:
   - name: Folliage
     uniqueID: 413428651
     locked: 0
+  - name: Bague
+    uniqueID: 3646440393
+    locked: 0
   - name: Player
     uniqueID: 2256473129
     locked: 0
