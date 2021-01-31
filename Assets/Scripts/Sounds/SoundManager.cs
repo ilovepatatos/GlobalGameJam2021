@@ -7,13 +7,7 @@ public class SoundManager : MonoBehaviour
     private static SoundManager instance = null;
 
     private void Awake() {
-        if (instance == null) {
-            instance = this;
-            //GameObject.DontDestroyOnLoad(gameObject);
-        }
-        else {
-            Destroy(gameObject);
-        }
+        instance = this;
     }
 
 #endregion

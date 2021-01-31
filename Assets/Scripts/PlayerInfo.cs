@@ -46,4 +46,12 @@ public class PlayerInfo
                 throw new ArgumentOutOfRangeException(nameof(audioMixerType), audioMixerType, null);
         }
     }
+
+    public void ResetVolumes()
+    {
+        masterVolume = 0.5f;
+        musicVolume = 0.5f;
+        effectVolume = 0.5f;
+        ambientVolume = 0.5f;
+    }
 }
