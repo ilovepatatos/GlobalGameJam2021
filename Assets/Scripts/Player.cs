@@ -4,16 +4,14 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerBank))]
 public class Player : Interacter
 {
-    [Header("Player")] 
-    public Transform Body;
+    [Header("Player")] public Transform Body;
     public FixedJoint2D Joint;
-    
-    [Space]
-    public Animator PlayerAnimator;
+
+    [Space] public Animator PlayerAnimator;
     public Animator LeftClawAnimator, RightClawAnimator;
-        
+
     [HideInInspector] public PlayerBank Bank;
-    private PlayerMovement playerMovement;
+    public PlayerMovement playerMovement;
 
     public PlayerInputPck Input = new PlayerInputPck();
 
@@ -35,6 +33,9 @@ public class Player : Interacter
 
         if (Input.Interact)
             ResolveInteraction();
+        if (DialogManager.IsDialogPlaying())
+            if (Input.Mouse0 || Input.Space)
+                DialogManager.CurrentDialog.Next();
     }
 
     protected override void OnInteraction(Interactable interactable) {

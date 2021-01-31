@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(RectTransform))]
@@ -12,12 +13,15 @@ public class InteractPopup : MonoBehaviour
 
     private LTDescr currentTween;
 
+    public Action OnPopUpStop, OnPopDownStop;
+
     public void PopUp() {
         if(currentTween != null)
             LeanTween.cancel(gameObject);
         
         currentTween = LeanTween.value(gameObject, rectTransform.anchoredPosition.y, yValueInitial + TravelDistanceY, TravelTime);
         currentTween.setOnUpdate(UpdatePosition);
+        currentTween.setOnComplete(OnPopUpStop);
     }
 
     public void PopDown() {
@@ -26,6 +30,7 @@ public class InteractPopup : MonoBehaviour
         
         currentTween = LeanTween.value(gameObject, rectTransform.anchoredPosition.y, yValueInitial, TravelTime);
         currentTween.setOnUpdate(UpdatePosition);
+        currentTween.setOnComplete(OnPopDownStop);
     }
 
     private void Awake() {
@@ -33,7 +38,6 @@ public class InteractPopup : MonoBehaviour
 
         //Save initial Y position
         yValueInitial = rectTransform.anchoredPosition.y;
-        Debug.Log($"Initial value: {yValueInitial}");
     }
 
     private void UpdatePosition(float y) {

@@ -145,7 +145,6 @@ GameObject:
   - component: {fileID: 2503569194218353419}
   - component: {fileID: 2503569194218353417}
   - component: {fileID: 2503569194218353416}
-  - component: {fileID: 2503569194218353415}
   - component: {fileID: 2503569194218353414}
   m_Layer: 5
   m_Name: InteractPopup
@@ -212,25 +211,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!95 &2503569194218353415
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2503569194218353418}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 91e5ad9204205f6458a7739bc9b3fc7d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &2503569194218353414
 MonoBehaviour:
   m_ObjectHideFlags: 0

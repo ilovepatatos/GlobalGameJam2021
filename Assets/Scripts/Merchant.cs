@@ -6,21 +6,35 @@ public class Merchant : Interactable
     [Header("Merchant")] 
     public Collider2D SellingZone;
     
+    [Space]
+    public Dialog Dialog;
+    public Dialog NothingToSell;
+    
     public override void OnInteractionStart(Interacter interacter) {
         base.OnInteractionStart(interacter);
         
         //Sell objects in sell zone
         if (interacter is Player player) {
+            Dialog.OnDialogStart += () => player.playerMovement.SetEnableMovement(false);
+            Dialog.OnDialogStop += () => player.playerMovement.SetEnableMovement(true);
+            Dialog.Start();
+            
             RetrieveObjectInSellingZone(out List<LostObject> objectsInSellingZone);
             if(objectsInSellingZone.Count > 0)
                 SellObjects(player.Bank, objectsInSellingZone);
+            else
+                OnSellEmtpySellZone();
         }
 
         interacter.TryTerminateInteraction();
     }
 
     public override void OnInteractionStop() {
-        base.OnInteractionStop();        
+        base.OnInteractionStop();
+    }
+
+    protected virtual void OnSellEmtpySellZone() {
+        NothingToSell.Start();
     }
 
     private void SellObjects(Bank bank, List<LostObject> objects) {

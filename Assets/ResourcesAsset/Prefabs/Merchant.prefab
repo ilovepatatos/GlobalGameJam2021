@@ -224,3 +224,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Interacter: {fileID: 0}
   SellingZone: {fileID: 5205188722820687631}
+  Dialog:
+    IsPlaying: 0
+    DelayBetweenChar: 0.08
+    TypeCharacterSound: {fileID: 11400000, guid: bf4e6fcccbb80864ba0de57091de299e, type: 2}
+    CharacterName: Merchant
+    Sentences:
+    - Welcome to the island. How can I help you today?
+    - Go away I hate you!
+  NothingToSell:
+    IsPlaying: 0
+    DelayBetweenChar: 0.08
+    TypeCharacterSound: {fileID: 11400000, guid: bf4e6fcccbb80864ba0de57091de299e, type: 2}
+    CharacterName: Merchant
+    Sentences:
+    - There was nothing in the shop zone...
