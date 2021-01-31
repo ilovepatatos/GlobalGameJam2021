@@ -55,9 +55,9 @@ public class RingSpawner : MonoBehaviour
 
     private void OnLostObjectOnDestroyEvent(Interactable interactable)
     {
-        // var actionDelay = new ActionDelayed(Random.Range(RespawnTimeRange.x, RespawnTimeRange.y), TrySpawn);
-        // ActionDelayedManager.AddAction(actionDelay);
-        TrySpawn();
+        var actionDelay = new ActionDelayed(Random.Range(RespawnTimeRange.x, RespawnTimeRange.y), TrySpawn);
+        ActionDelayedManager.AddAction(actionDelay);
+        // TrySpawn();
     }
 
     private void OnPlayerInteractionStart(Interactable interactable)

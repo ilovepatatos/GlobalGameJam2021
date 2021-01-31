@@ -15,6 +15,7 @@ public class Player : Interacter
 
     public PlayerInputPck Input = new PlayerInputPck();
 
+    public bool InSafeZone;
     public bool IsCarryingObject => CurrentInteractableSelected is LostObject;
     public LostObject ObjectCarrying => CurrentInteractableSelected as LostObject;
 
