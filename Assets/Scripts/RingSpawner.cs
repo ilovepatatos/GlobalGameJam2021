@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
@@ -16,7 +17,7 @@ public class RingSpawner : MonoBehaviour
     [MinMax(1, 100)] public Vector2 RespawnTimeRange;
 
     public event Action<LostObject> OnSpawnRing;
-    public event Action<RingSpawner> OnSpawnerInteraction;
+    public UnityEvent OnSpawnerInteraction = new UnityEvent();
 
     private GameObject ring;
     private LostObject lostObject;
@@ -58,7 +59,8 @@ public class RingSpawner : MonoBehaviour
     private void OnPlayerInteractionStart(Interactable interactable) {
         lostObject.OnPlayerInteractionStart -= OnPlayerInteractionStart;
         RendererCover.enabled = false;
-        OnSpawnerInteraction?.Invoke(this);
+        lostObject.GetComponent<SpriteRenderer>().sortingOrder = 420; // Un gros chiffre plein de swagg
+        OnSpawnerInteraction?.Invoke();
     }
 
     private void ShuffleCover() {

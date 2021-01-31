@@ -50,6 +50,7 @@ public class LostObject : Interactable
 
     public void Sell() {
         //TODO destroy animation
+        Destroy(gameObject);
     }
 
     private void SetPositionFromInteracter(Interacter interacter) {
