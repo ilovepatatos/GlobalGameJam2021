@@ -23,6 +23,12 @@ public class UIManager : MonoBehaviour
     [Header("UI")] 
     public InteractPopup InteractPopup;
 
+    [Space]
+    public SetVolume Master;
+    public SetVolume Music;
+    public SetVolume Effect;
+    public SetVolume Ambient;
+
     public static void SetInteractPopupActive(bool activate) {
         if(activate)
             Instance.InteractPopup.PopUp();

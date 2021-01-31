@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerInfoManager : MonoBehaviour
 {
@@ -28,6 +29,22 @@ public class PlayerInfoManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start() {
+        Load();
+        UIManager.Instance.Master.SetLevel(info.masterVolume);
+        UIManager.Instance.Master.SetSliderValue(info.masterVolume);
+        UIManager.Instance.Music.SetLevel(info.musicVolume);
+        UIManager.Instance.Music.SetSliderValue(info.musicVolume);
+        UIManager.Instance.Effect.SetLevel(info.effectVolume);
+        UIManager.Instance.Effect.SetSliderValue(info.effectVolume);
+        UIManager.Instance.Ambient.SetLevel(info.ambientVolume);
+        UIManager.Instance.Ambient.SetSliderValue(info.ambientVolume);
+    }
+
+    private void OnDestroy() {
+        Save();
     }
 
     public void Load()

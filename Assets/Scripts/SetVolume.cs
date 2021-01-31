@@ -15,17 +15,18 @@ public class SetVolume : MonoBehaviour
     public SoundSettings OnStepChangeSound;
     private float currentStep;
 
-    private void Start() {
+    private void Awake() {
         slider = GetComponent<Slider>();
         mixerProperty = Global.MixerProperty[exposedValue];
-        var value = PlayerInfoManager.Instance.GetMixerVolume(exposedValue);
-        slider.value = value;
-        SetLevel(value);
     }
 
     public void SetLevel(float sliderValue) {
         mixer.SetFloat(mixerProperty, Mathf.Log10(sliderValue) * 20);
         PlayerInfoManager.Instance.SetMixerVolume(exposedValue, sliderValue);
+    }
+
+    public void SetSliderValue(float value) {
+        slider.value = value;
     }
 
     public void OnValueChanged(float value) {
