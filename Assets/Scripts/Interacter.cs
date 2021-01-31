@@ -56,10 +56,12 @@ public class Interacter : MonoBehaviour
         return true;
     }
 
-    protected virtual void OnInteraction(Interactable interactable) {
-        lastFrameInteractableInRange = null;
+    protected virtual void OnInteraction(Interactable interactable) { }
+
+    protected virtual void OnTerminateInteraction(Interactable interactable) {
+        if(IsInteractableAccessible(interactable))
+            OnInteractableEnterRange?.Invoke(interactable);
     }
-    protected virtual void OnTerminateInteraction(Interactable interactable) { }
 
     protected virtual void Awake() {
         InteractLayer = LayerMask.GetMask("Interactable");
@@ -69,7 +71,9 @@ public class Interacter : MonoBehaviour
         //OnInteractableLeaveRange += obj => { Debug.Log($"{obj.name} left interactable range..."); };
     }
 
-    protected virtual void Update() {
+    protected virtual void FixedUpdate() {
+        if (IsInteracting)
+            return;
         UpdateInteractableItemsInRange();
         ResolveInteractable();
     }

@@ -27,8 +27,7 @@ public class Player : Interacter
         OnInteractableLeaveRange += obj => { UIManager.SetInteractPopupActive(false); };
     }
 
-    protected override void Update() {
-        base.Update();
+    protected  void Update() {
         Input.Update();
 
         if (Input.Interact)
