@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 dir = player.Input.MovementDirection;
         float weight = 1;
         
-        dir = ResolveDirection(dir);
+        //dir = ResolveDirection(dir);
 
         if (player.IsCarryingObject) {
             weight = player.ObjectCarrying.Weight;

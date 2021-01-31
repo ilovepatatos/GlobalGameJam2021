@@ -23,10 +23,12 @@ public class DialogManager : MonoBehaviour
     }
 
 #endregion
-    
+
     public DialogComponent DialogComponent;
 
     public static Dialog CurrentDialog;
+
+    private static bool isCoroutineRunning;
     private static Coroutine currentCoroutine;
 
     public static void PrepareDialogBox(Dialog dialog, Action action) {
@@ -38,26 +40,45 @@ public class DialogManager : MonoBehaviour
 
     public static void CloseDialogBox() {
         Instance.DialogComponent.PopDown();
+        TerminateCoroutine();
+    }
+
+    public static bool TryCompleteSentence(string sentence) {
+        if (!isCoroutineRunning)
+            return false;
+        TerminateCoroutine();
+
+        Instance.DialogComponent.Sentence.text = sentence;
+        return true;
     }
 
     public static void TypeSentence(string sentence, float charDelay, SoundSettings sound) {
-        if(currentCoroutine != null)
-            Instance.StopCoroutine(currentCoroutine);
+        TerminateCoroutine();
         currentCoroutine = Instance.StartCoroutine(Type(sentence, charDelay, sound));
     }
 
     public static bool IsDialogPlaying() {
         return CurrentDialog != null && CurrentDialog.IsPlaying;
     }
-    
+
+    private static void TerminateCoroutine() {
+        if (isCoroutineRunning)
+            Instance.StopCoroutine(currentCoroutine);
+        isCoroutineRunning = false;
+    }
+
     private static IEnumerator Type(string sentence, float charDelay, SoundSettings sound) {
+        isCoroutineRunning = true;
+
         WaitForSeconds wait = new WaitForSeconds(charDelay);
         Instance.DialogComponent.Sentence.text = "";
-        
+
         foreach (char c in sentence) {
             Instance.DialogComponent.Sentence.text += c;
             SoundManager.PlayOneShot(sound);
             yield return wait;
         }
+
+        isCoroutineRunning = false;
     }
 }
