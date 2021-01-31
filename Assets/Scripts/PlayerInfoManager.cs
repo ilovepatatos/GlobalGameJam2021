@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerInfoManager : MonoBehaviour
 {
@@ -66,6 +67,47 @@ public class PlayerInfoManager : MonoBehaviour
 
     public static void SetCoins(int amount) {
         Instance.info.coins = amount;
+    }
+
+    public static void UnlockArmor(Category category) {
+        switch (category) {
+            case Category.Armor01:
+                Instance.info.HasUnlockSilverArmor = true;
+                break;
+            case Category.Armor02:
+                Instance.info.HasUnlockGoldenArmor = true;
+                break;
+            case Category.Armor03:
+                Instance.info.HasUnlockDiamondArmor = true;
+                break;
+            case Category.Armor04:
+                Instance.info.HasUnlockDeluxeArmor = true;
+                break;
+            case Category.Armor05:
+                Instance.info.HasUnlockStarArmor = true;
+                break;
+            case Category.Armor06:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(category), category, null);
+        }
+    }
+
+    public static bool IsUnlockFromSave(Category category) {
+        switch (category) {
+            case Category.Armor01:
+                return Instance.info.HasUnlockSilverArmor;
+            case Category.Armor02:
+                return Instance.info.HasUnlockGoldenArmor;
+            case Category.Armor03:
+                return Instance.info.HasUnlockDiamondArmor;
+            case Category.Armor04:
+                return Instance.info.HasUnlockDeluxeArmor;
+            case Category.Armor05:
+                return Instance.info.HasUnlockStarArmor;
+            default:
+                return false;
+        }
     }
 
 }

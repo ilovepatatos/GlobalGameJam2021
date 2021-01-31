@@ -8,6 +8,12 @@ public class PlayerInfo
     public float musicVolume = 0.5f;
     public float effectVolume = 0.5f;
     public float ambientVolume = 0.5f;
+
+    public bool HasUnlockSilverArmor;
+    public bool HasUnlockGoldenArmor;
+    public bool HasUnlockDiamondArmor;
+    public bool HasUnlockDeluxeArmor;
+    public bool HasUnlockStarArmor;
     
     public float GetMixerVolume(AudioMixerType audioMixerType)
     {
