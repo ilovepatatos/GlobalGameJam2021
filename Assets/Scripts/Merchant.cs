@@ -3,33 +3,47 @@ using UnityEngine;
 
 public class Merchant : Interactable
 {
-    [Header("Merchant")] 
-    public Collider2D SellingZone;
-    
-    [Space]
-    public Dialog Dialog;
+    [Header("Merchant")] public Collider2D SellingZone;
+
+    [Space] public Dialog Dialog;
     public Dialog NothingToSell;
-    
+
+    [Space] public Shop Shop;
+
+    public void OnSellButtonPressed() {
+        if (Interacter is Player player) {
+            RetrieveObjectInSellingZone(out List<LostObject> objectsInSellingZone);
+            SellObjects(player.Bank, objectsInSellingZone);
+        }
+    }
+
+    //TODO Should be in player
+    public void OnExitShop() {
+        if (Interacter)
+            Interacter.TryTerminateInteraction();
+    }
+
     public override void OnInteractionStart(Interacter interacter) {
         base.OnInteractionStart(interacter);
-        
-        //Sell objects in sell zone
-        if (interacter is Player player) {
-            Dialog.OnDialogStart += () => player.playerMovement.SetEnableMovement(false);
-            Dialog.OnDialogStop += () => player.playerMovement.SetEnableMovement(true);
-            Dialog.Start();
-            
-            RetrieveObjectInSellingZone(out List<LostObject> objectsInSellingZone);
-            if(objectsInSellingZone.Count > 0)
-                SellObjects(player.Bank, objectsInSellingZone);
-            else
-                OnSellEmtpySellZone();
+
+        if (!(interacter is Player player)) {
+            interacter.TryTerminateInteraction();
+            return;
         }
 
-        interacter.TryTerminateInteraction();
+        player.playerMovement.SetEnableMovement(false);
+        UIManager.SetPauseButtonActive(false);
+        UIManager.SetInGameCoinActive(false);
+        Shop.StartShopping(player.Bank, !IsSellZoneEmpty());
     }
 
     public override void OnInteractionStop() {
+        if (Interacter is Player player) {
+            player.playerMovement.SetEnableMovement(true);
+            UIManager.SetPauseButtonActive(true);
+            UIManager.SetInGameCoinActive(true);
+        }
+
         base.OnInteractionStop();
     }
 
@@ -43,23 +57,36 @@ public class Merchant : Interactable
             amountMoney += obj.Price;
             obj.Sell();
         }
+
         bank.Deposite(amountMoney);
     }
 
     private void RetrieveObjectInSellingZone(out List<LostObject> objects) {
         objects = new List<LostObject>();
         List<Collider2D> hits = new List<Collider2D>();
-        
+
         ContactFilter2D filter = new ContactFilter2D();
         filter.layerMask = LayerMask.GetMask("Interactable");
         filter.useTriggers = true;
-        
+
         if (SellingZone.OverlapCollider(filter, hits) <= 0)
             return;
 
         foreach (Collider2D hit in hits) {
-            if(hit.TryGetComponent(out LostObject obj))
+            if (hit.TryGetComponent(out LostObject obj))
                 objects.Add(obj);
         }
+    }
+
+    private bool IsSellZoneEmpty() {
+        List<Collider2D> hits = new List<Collider2D>();
+        
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.layerMask = LayerMask.GetMask("Interactable");
+        filter.useTriggers = true;
+
+        SellingZone.OverlapCollider(filter, hits);
+
+        return hits.Count <= 0;
     }
 }
