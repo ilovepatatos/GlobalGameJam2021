@@ -148,8 +148,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 691640865bd5452e91ab297ee1d2c7c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DamagePlayerSound: {fileID: 11400000, guid: e97b87fd4fb957c459cfeb34831a51ac, type: 2}
   birdVisual: {fileID: 1464976913602942726}
-  Shadow: {fileID: 4924678242589127404}
+  Shadow: {fileID: 5676287569049862891}
   PlayerReference: {fileID: 0}
   BirdAnimator: {fileID: 2027958098829787146}
   BecAnimator: {fileID: 1453714629859955101}
@@ -273,6 +274,8 @@ GameObject:
   - component: {fileID: 2455644472578124662}
   - component: {fileID: 6431683661489192480}
   - component: {fileID: 4249133836760934584}
+  - component: {fileID: 5676287569049862891}
+  - component: {fileID: 6077108531235144932}
   m_Layer: 0
   m_Name: Shadow
   m_TagString: Untagged
@@ -331,11 +334,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 413428651
-  m_SortingLayer: 3
-  m_SortingOrder: -1
+  m_SortingLayerID: 684730415
+  m_SortingLayer: 7
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2376933601864114580, guid: 4bafaf5070817a74794baffcfb9d9cad, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5803922}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -364,3 +367,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5676287569049862891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4924678242589127404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52edca11d9be42eca0ca3344aa4247b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPlayerInside: 0
+  Collider2D: {fileID: 6077108531235144932}
+--- !u!58 &6077108531235144932
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4924678242589127404}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

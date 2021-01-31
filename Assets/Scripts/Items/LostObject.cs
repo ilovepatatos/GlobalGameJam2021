@@ -15,7 +15,6 @@ public class LostObject : Interactable
     [Space] 
     public SoundSettings OnPickupSound;
     public SoundSettings OnDropSound;
-    public SoundSettings SellSound;
 
     public Action<Interactable> OnPlayerInteractionStart;
     public Action<Interactable> OnDestroyEvent;
@@ -51,7 +50,7 @@ public class LostObject : Interactable
 
     public void Sell() {
         //TODO destroy animation
-        SoundManager.PlayOneShot(SellSound);
+        Destroy(gameObject);
     }
 
     private void SetPositionFromInteracter(Interacter interacter) {
