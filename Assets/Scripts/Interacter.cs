@@ -55,8 +55,10 @@ public class Interacter : MonoBehaviour
         CurrentInteractableSelected = null;
         return true;
     }
-    
-    protected virtual void OnInteraction(Interactable interactable) { }
+
+    protected virtual void OnInteraction(Interactable interactable) {
+        lastFrameInteractableInRange = null;
+    }
     protected virtual void OnTerminateInteraction(Interactable interactable) { }
 
     protected virtual void Awake() {
