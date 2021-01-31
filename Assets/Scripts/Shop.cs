@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
-    [Header("Shop")] public Dialog WinDialog;
+    [Header("Shop")] 
+    public Dialog WinDialog;
+    public SoundSettings WinningSound;
 
     [Space] public GameObject ShopCanvas;
     public TMP_Text MoneyText;
@@ -69,19 +71,20 @@ public class Shop : MonoBehaviour
         Buy(currentSelectItem);
         if (AmountItemsMissing() <= 0) {
             WinDialog.Start();
+            SoundManager.PlayOneShot(WinningSound);
             StopShopping();
             currentInteracter.TryTerminateInteraction();
         }
     }
 
     public void OnEquipmentEquipped(ShopItem item) {
-        if (!(currentInteracter is Player player))
-            return;
         if (CurrentEquippedItem)
             CurrentEquippedItem.UnEquip();
-
-        player.Armory.Equip(item.Category);
         CurrentEquippedItem = item;
+        
+        if (!(currentInteracter is Player player))
+            return;
+        player.Armory.Equip(item.Category);
     }
 
     private int AmountItemsMissing() {

@@ -976,6 +976,7 @@ MonoBehaviour:
     Sentences:
     - Congrats you completed our game.
     - Feel free to keep looking around, thx for playing <
+  WinningSound: {fileID: 11400000, guid: 49a6695c1f62caa45816c58328af457c, type: 2}
   ShopCanvas: {fileID: 2797443045843367666}
   MoneyText: {fileID: 2795399060634768704}
   BuyCanvas: {fileID: 4196339166484513373}
@@ -1842,6 +1843,10 @@ PrefabInstance:
       value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 5810011465667195054, guid: dbd8d4679fe4ba3409bfa77460b942eb, type: 3}
+      propertyPath: myShop
+      value: 
+      objectReference: {fileID: 5909665724343772528}
+    - target: {fileID: 5810011465667195054, guid: dbd8d4679fe4ba3409bfa77460b942eb, type: 3}
       propertyPath: Category
       value: 4
       objectReference: {fileID: 0}
@@ -1971,6 +1976,10 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5810011465667195054, guid: dbd8d4679fe4ba3409bfa77460b942eb, type: 3}
+      propertyPath: myShop
+      value: 
+      objectReference: {fileID: 5909665724343772528}
+    - target: {fileID: 5810011465667195054, guid: dbd8d4679fe4ba3409bfa77460b942eb, type: 3}
       propertyPath: Category
       value: 1
       objectReference: {fileID: 0}
@@ -2091,6 +2100,10 @@ PrefabInstance:
       propertyPath: Price
       value: 5000
       objectReference: {fileID: 0}
+    - target: {fileID: 5810011465667195054, guid: dbd8d4679fe4ba3409bfa77460b942eb, type: 3}
+      propertyPath: myShop
+      value: 
+      objectReference: {fileID: 5909665724343772528}
     - target: {fileID: 5810011465667195054, guid: dbd8d4679fe4ba3409bfa77460b942eb, type: 3}
       propertyPath: Category
       value: 5
@@ -2217,6 +2230,10 @@ PrefabInstance:
       propertyPath: Price
       value: 250
       objectReference: {fileID: 0}
+    - target: {fileID: 5810011465667195054, guid: dbd8d4679fe4ba3409bfa77460b942eb, type: 3}
+      propertyPath: myShop
+      value: 
+      objectReference: {fileID: 5909665724343772528}
     - target: {fileID: 5810011465667195054, guid: dbd8d4679fe4ba3409bfa77460b942eb, type: 3}
       propertyPath: Category
       value: 2
@@ -2346,6 +2363,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -3453745258949808848, guid: 7506774c2fc309e4680c46aca5510c20, type: 3}
+    - target: {fileID: 5810011465667195054, guid: dbd8d4679fe4ba3409bfa77460b942eb, type: 3}
+      propertyPath: myShop
+      value: 
+      objectReference: {fileID: 5909665724343772528}
     - target: {fileID: 5810011465667195054, guid: dbd8d4679fe4ba3409bfa77460b942eb, type: 3}
       propertyPath: ShortName
       value: Silver Shell
@@ -2487,6 +2508,10 @@ PrefabInstance:
       propertyPath: Price
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 5810011465667195054, guid: dbd8d4679fe4ba3409bfa77460b942eb, type: 3}
+      propertyPath: myShop
+      value: 
+      objectReference: {fileID: 5909665724343772528}
     - target: {fileID: 5810011465667195054, guid: dbd8d4679fe4ba3409bfa77460b942eb, type: 3}
       propertyPath: Category
       value: 3

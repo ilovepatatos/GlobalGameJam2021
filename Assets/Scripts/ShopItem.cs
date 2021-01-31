@@ -13,8 +13,10 @@ public class ShopItem : Item
     [SerializeField] private Color selectedColor;
     [SerializeField] private Color unselectedColor;
 
-    [Space] public SoundSettings OnClickSound;
+    [Space] 
+    public SoundSettings OnClickSound;
     public SoundSettings OnHoverSound;
+    public SoundSettings UnlockItemSound;
 
     [HideInInspector] public bool HasBeenBought;
 
@@ -32,7 +34,7 @@ public class ShopItem : Item
             PriceText.text = "Equipped";
             SetButtonEnable(false);
             SetButtonColor(boughtColor);
-            myShop.CurrentEquippedItem = this;
+            myShop.OnEquipmentEquipped(this);
             PlayerInfoManager.UnlockArmor(Category);
         }
     }
@@ -91,6 +93,7 @@ public class ShopItem : Item
         HasBeenBought = true;
         SetButtonColor(boughtColor);
         PlayerInfoManager.UnlockArmor(Category);
+        SoundManager.PlayOneShot(UnlockItemSound);
         Equip();
     }
 

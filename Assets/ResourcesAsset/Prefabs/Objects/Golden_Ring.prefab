@@ -161,3 +161,4 @@ MonoBehaviour:
   CarryDistance: 0.8
   OnPickupSound: {fileID: 11400000, guid: 41cbb5dcd38f61d46910b2407c2a2d2f, type: 2}
   OnDropSound: {fileID: 11400000, guid: 9a7883a095b6b1942944664522bcb871, type: 2}
+  SellSound: {fileID: 11400000, guid: 9d8b299d45263124aa82c2f2f21ad2d3, type: 2}

@@ -330,7 +330,9 @@ MonoBehaviour:
   unselectedColor: {r: 0, g: 0, b: 0, a: 0}
   OnClickSound: {fileID: 11400000, guid: 5943f785c54e88841b7e1c8c81a07ad3, type: 2}
   OnHoverSound: {fileID: 11400000, guid: 3696a93698041d342820089ff2c77873, type: 2}
+  UnlockItemSound: {fileID: 11400000, guid: 36553a7e76d287c4d8e69574de8f70fc, type: 2}
   HasBeenBought: 0
+  myShop: {fileID: 0}
 --- !u!1 &8659618352904498866
 GameObject:
   m_ObjectHideFlags: 0
