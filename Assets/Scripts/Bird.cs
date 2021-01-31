@@ -45,7 +45,7 @@ public class Bird : MonoBehaviour
 
     private void InitToTarget()
     {
-        var toTargetTransition = LeanTween.value(birdVisual, initPosition, targetPosition, 1f);
+        var toTargetTransition = LeanTween.value(birdVisual, initPosition, targetPosition, 2f);
         toTargetTransition.setOnUpdate((Vector3 f) => birdVisual.transform.position = f);
         toTargetTransition.setOnComplete(() =>
         {
@@ -56,7 +56,7 @@ public class Bird : MonoBehaviour
 
     private void TargetToRetreat()
     {
-        var toTargetTransition = LeanTween.value(birdVisual, targetPosition, retreatPosition, 1f);
+        var toTargetTransition = LeanTween.value(birdVisual, targetPosition, retreatPosition, 2f);
         toTargetTransition.setOnUpdate((Vector3 f) =>
         {
             birdVisual.transform.position = f;
