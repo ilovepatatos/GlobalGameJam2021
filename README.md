@@ -10,7 +10,6 @@ Being a little hermit crab on a very luxurious beach, you often find precious lo
 
 ## Installation
 You can either play on the browser at [Ring Bearer](https://marcuslelus.itch.io/ring-bearer)   
-Or you can download the release for Windows.
 
 
 ## How to play
